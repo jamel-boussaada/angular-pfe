@@ -1,0 +1,377 @@
+<div class="flex flex-col flex-auto min-w-0">
+
+    <!-- Main -->
+    <div class="flex-auto p-6 sm:p-10">
+
+        <!-- CONTENT GOES HERE -->
+          <!-- CONTENT GOES HERE -->
+          <div class="h-400 min-h-400 max-h-400 border-2 border-dashed border-gray-300 rounded-2xl">
+            <div class="sm:absolute sm:inset-0 flex flex-col flex-auto min-w-0 sm:overflow-hidden bg-card dark:bg-transparent">
+
+                <!-- Header -->
+                <div id="tittle" class="relative flex flex-col sm:flex-row flex-0 sm:items-center sm:justify-between py-8 px-6 md:px-8 border-b ">
+                    <!-- Loader -->
+                    <div
+                        class="absolute inset-x-0 bottom-0"
+                        *ngIf="isLoading">
+                        <mat-progress-bar [mode]="'indeterminate'"></mat-progress-bar>
+                    </div>
+                    <!-- Title -->
+                    <div class="text-4xl font-extrabold tracking-tight" >Ajouter Une Avion
+                    </div>
+                    <!-- Actions -->
+                    <div class="flex shrink-0 items-center mt-6 sm:mt-0 sm:ml-4">
+
+                    </div>
+                </div>
+                <br>     <br>     <br>     <br><br><br>
+
+                <mat-stepper [linear]="isLinear" #stepper >
+                    <mat-step [stepControl]="constructGroupForm"  >
+                        <ng-template matStepLabel>Constructeur</ng-template>
+
+
+                      <div *ngIf="!disabled; then thenBlock else elseBlock"></div>
+                      <ng-template #thenBlock><br>
+                        <form [formGroup]="constructGroupForm"  >
+<mat-form-field appearance="fill" class="w-1/3 pl-2">
+  <mat-label>les construcateurs existant</mat-label>
+  <mat-select  formControlName="nomConstructeur" required>
+    <mat-option *ngFor="let c of construct" [value]="c.nomConstructeur">
+      {{c.nomConstructeur}}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+                        </form>
+                            <br>
+                            <mat-checkbox (click)="disabled=true" >Ajouter un nouveau constructeur</mat-checkbox>
+                            <br>
+                      </ng-template>
+
+                      <ng-template #elseBlock>
+                        <form [formGroup]="newConstructGroupForm">
+                          <mat-form-field appearance="fill" class="w-1/3 pl-2">
+                              <mat-label> nouveau Constructeur</mat-label>
+                              <input matInput  placeholder="nom Constructeur" formControlName="nomConstructeur" required>
+                            </mat-form-field>
+                        </form>
+                      </ng-template><br>
+
+                      <div *ngIf="!oldModel; then modeleExsist else nouveauModele"></div>
+                      <ng-template #modeleExsist>
+                        <form [formGroup]="modeleGroupForm">
+                            <mat-form-field appearance="fill" class="w-1/3 pl-2">
+                                <mat-label>les modele existant</mat-label>
+                                <mat-select  formControlName="nomModele" required>
+                                  <mat-option *ngFor="let m of model" [value]="m.nomModele">
+                                    {{m.nomModele}}
+                                  </mat-option>
+                                </mat-select>
+                              </mat-form-field>
+                          </form>
+                          <mat-checkbox  (click)="oldModel=true" >Ajouter un nouveau modele</mat-checkbox>
+
+                      </ng-template>
+
+                      <ng-template #nouveauModele>
+                        <form [formGroup]="newModeleGroupForm">
+                            <mat-form-field appearance="fill" class="w-1/3 pl-2">
+                              <mat-label> Nouveau modele</mat-label>
+                              <input matInput formControlName="nomModele" placeholder="nom du modele"
+                                     required>
+                            </mat-form-field>
+                          </form>
+                      </ng-template>
+
+
+
+                        <div>
+                          <button mat-button matStepperNext (click)="addConstruct()" >Next</button>
+                        </div>
+
+                    </mat-step>
+
+
+
+
+
+
+
+                    <!-- <mat-step [stepControl]="modeleGroupForm" label="modele">
+
+                    </mat-step> -->
+
+
+
+                  <mat-step [stepControl]="avionFormGroup" label="avion">
+                      <form [formGroup]="avionFormGroup">
+                        <mat-form-field appearance="fill" class="w-1/3 pl-1">
+                          <mat-label>Numéro Serie</mat-label>
+                          <input type="number" matInput formControlName="numderoSerie" placeholder="nom du modele"
+                                 required>
+                        </mat-form-field>
+
+
+
+
+                        <mat-form-field appearance="fill" class="w-1/3 pl-">
+                            <mat-label> date de dateFabrication</mat-label>
+                            <input matInput [matDatepicker]="picker" formControlName="dateFabrication">
+                            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                            <mat-datepicker #picker></mat-datepicker>
+                          </mat-form-field>
+
+
+
+                          <mat-form-field appearance="fill" class="w-1/3 pl-1">
+                            <mat-label> date de prochaine visite CEN</mat-label>
+                            <input matInput [matDatepicker]="picker1" formControlName="dateProcheneVisiteCEN">
+                            <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                            <mat-datepicker #picker1></mat-datepicker>
+                          </mat-form-field>
+
+                          <mat-form-field appearance="fill" class="w-1/3 pl-1">
+                            <mat-label> date de prochaine echeance</mat-label>
+                            <input matInput [matDatepicker]="picker2" formControlName="dateProcheneEcheance">
+                            <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                            <mat-datepicker #picker2></mat-datepicker>
+                          </mat-form-field>
+
+                          <mat-form-field appearance="fill" class="w-1/3 pl-1">
+                            <mat-label> date de prochaine echéance pessée </mat-label>
+                            <input matInput [matDatepicker]="picker3" formControlName="dateProcheneEcheancePesseé">
+                            <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
+                            <mat-datepicker #picker3></mat-datepicker>
+                          </mat-form-field>
+
+
+                        <mat-form-field appearance="fill" class="w-1/3 pl-1">
+                          <mat-label>Immatriculation</mat-label>
+                          <input matInput formControlName="immatriculation" placeholder="nom du modele"
+                                 required>
+                        </mat-form-field>
+
+
+                        <!-- <mat-form-field appearance="fill" class="w-1/3 pl-1">
+                          <mat-label>FhGV</mat-label>
+                          <input matInput formControlName="modele" placeholder="nom du modele"
+                                 required>
+                        </mat-form-field> -->
+
+
+                        <mat-form-field appearance="fill" class="w-1/3 pl-1">
+                          <mat-label>FhGV</mat-label>
+                          <input matInput formControlName="fHGV" placeholder="nom du modele"
+                                 required>
+                        </mat-form-field>
+
+                        <mat-form-field appearance="fill" class="w-1/3 pl-1">
+                          <mat-label>FhNEW</mat-label>
+                          <input matInput formControlName="fHNEW" placeholder="nom du modele"
+                                 required>
+                        </mat-form-field>
+
+                        <div>
+                          <button mat-button matStepperPrevious>Back</button>
+                          <button mat-button matStepperNext (click)="addAvion()">Next</button>
+                        </div>
+                      </form>
+                    </mat-step>
+
+
+
+
+                    <mat-step [stepControl]="composantFormGroup" label="composant">
+                      <form [formGroup]="composantFormGroup">
+                        <mat-form-field appearance="fill" class="w-1/3 pl-1">
+                          <mat-label>Nom du Composant</mat-label>
+                          <input matInput formControlName="nomComposant" placeholder="Ex. 1 Main St, New York, NY"
+                                 required>
+                        </mat-form-field>
+
+
+                        <mat-form-field appearance="fill" class="w-1/3 pl-1">
+                          <mat-label>Serial Number</mat-label>
+                          <input  type="number" matInput formControlName="serialNumber" placeholder="Ex. 1 Main St, New York, NY"
+                                 required>
+                        </mat-form-field>
+
+
+                        <mat-form-field appearance="fill" class="w-1/3 pl-1">
+                            <mat-label> date du dateFabrication </mat-label>
+                            <input matInput [matDatepicker]="picker5" formControlName="dateDeFabrication">
+                            <mat-datepicker-toggle matSuffix [for]="picker5"></mat-datepicker-toggle>
+                            <mat-datepicker #picker5></mat-datepicker>
+                          </mat-form-field>
+
+                        <mat-form-field appearance="fill" class="w-1/3 pl-1">
+                          <mat-label>fHnew</mat-label>
+                          <input matInput formControlName="fHnew" placeholder="Ex. 1 Main St, New York, NY"
+                                 required>
+                        </mat-form-field>
+
+
+
+                        <mat-form-field appearance="fill" class="w-1/3 pl-1">
+                            <mat-label> Date de prochene echéance GV </mat-label>
+                            <input matInput [matDatepicker]="picker6" formControlName="dateProcheneEcheanceGV">
+                            <mat-datepicker-toggle matSuffix [for]="picker6"></mat-datepicker-toggle>
+                            <mat-datepicker #picker6></mat-datepicker>
+                          </mat-form-field>
+
+                        <mat-form-field appearance="fill" class="w-1/3 pl-1">
+                          <mat-label>constructeur</mat-label>
+                          <input matInput formControlName="constructeur" placeholder="Ex. 1 Main St, New York, NY"
+                                 required>
+                        </mat-form-field>
+
+                        <mat-form-field appearance="fill" class="w-1/3 pl-1">
+                          <mat-label>Part Number</mat-label>
+                          <input matInput formControlName="partNumber" placeholder="Ex. 1 Main St, New York, NY"
+                                 required>
+                        </mat-form-field>
+
+
+                        <mat-form-field appearance="fill" class="w-1/3 pl-2">
+                            <mat-label>type Composant</mat-label>
+                            <mat-select  formControlName="typeComposant" required>
+                              <mat-option *ngFor="let t of typeComposant" [value]="t.id">
+                                {{t.TypeComposant}}
+                              </mat-option>
+                            </mat-select>
+                          </mat-form-field>
+
+
+
+
+                        <!-- <mat-form-field appearance="fill" class="w-1/3 pl-1">
+                          <mat-label>Address</mat-label>
+                          <input matInput formControlName="equipements" placeholder="Ex. 1 Main St, New York, NY"
+                                 required>
+                        </mat-form-field> -->
+
+
+                        <!-- <mat-form-field appearance="fill" class="w-1/3 pl-1">
+                          <mat-label>Address</mat-label>
+                          <input matInput formControlName="avions" placeholder="Ex. 1 Main St, New York, NY"
+                                 required>
+                        </mat-form-field> -->
+
+
+
+                        <div>
+                          <button mat-button matStepperPrevious >Back</button>
+                          <button mat-button matStepperNext (click)="ajoutPremierComposant()">Next</button>
+                        </div>
+                      </form>
+                    </mat-step>
+
+
+
+
+
+                    <mat-step [stepControl]="deuxiemecomposantFormGroup" label="deuxieme composant">
+                      <form [formGroup]="deuxiemecomposantFormGroup">
+                        <mat-form-field appearance="fill" class="w-1/3 pl-1">
+                            <mat-label>Nom du Composant</mat-label>
+                            <input matInput formControlName="nomComposant" placeholder="Ex. 1 Main St, New York, NY"
+                                   required>
+                          </mat-form-field>
+
+
+                          <mat-form-field appearance="fill" class="w-1/3 pl-1">
+                            <mat-label>Serial Number</mat-label>
+                            <input type="number"  matInput formControlName="serialNumber" placeholder="Ex. 1 Main St, New York, NY"
+                                   required>
+                          </mat-form-field>
+
+
+                          <mat-form-field appearance="fill" class="w-1/3 pl-1">
+                              <mat-label> date du dateFabrication </mat-label>
+                              <input matInput [matDatepicker]="picker7" formControlName="dateDeFabrication">
+                              <mat-datepicker-toggle matSuffix [for]="picker7"></mat-datepicker-toggle>
+                              <mat-datepicker #picker7></mat-datepicker>
+                            </mat-form-field>
+
+                          <mat-form-field appearance="fill" class="w-1/3 pl-1">
+                            <mat-label>fHnew</mat-label>
+                            <input matInput formControlName="fHnew" placeholder="Ex. 1 Main St, New York, NY"
+                                   required>
+                          </mat-form-field>
+
+
+
+                          <mat-form-field appearance="fill" class="w-1/3 pl-1">
+                              <mat-label> Date de prochene echéance GV </mat-label>
+                              <input matInput [matDatepicker]="picker8" formControlName="dateProcheneEcheanceGV">
+                              <mat-datepicker-toggle matSuffix [for]="picker8"></mat-datepicker-toggle>
+                              <mat-datepicker #picker8></mat-datepicker>
+                            </mat-form-field>
+
+                          <mat-form-field appearance="fill" class="w-1/3 pl-1">
+                            <mat-label>constructeur</mat-label>
+                            <input matInput formControlName="constructeur" placeholder="Ex. 1 Main St, New York, NY"
+                                   required>
+                          </mat-form-field>
+
+                          <mat-form-field appearance="fill" class="w-1/3 pl-1">
+                            <mat-label>Part Number</mat-label>
+                            <input  matInput formControlName="partNumber" placeholder="Ex. 1 Main St, New York, NY"
+                                   required>
+                          </mat-form-field>
+
+
+                          <mat-form-field appearance="fill" class="w-1/3 pl-2">
+                              <mat-label>type Composant</mat-label>
+                              <mat-select  formControlName="typeComposant" required>
+                                <mat-option *ngFor="let t of typeComposant" [value]="t.id">
+                                  {{t.TypeComposant}}
+                                </mat-option>
+                              </mat-select>
+                            </mat-form-field>
+
+
+
+
+                          <!-- <mat-form-field appearance="fill" class="w-1/3 pl-1">
+                            <mat-label>Address</mat-label>
+                            <input matInput formControlName="equipements" placeholder="Ex. 1 Main St, New York, NY"
+                                   required>
+                          </mat-form-field> -->
+
+
+                          <!-- <mat-form-field appearance="fill" class="w-1/3 pl-1">
+                            <mat-label>Address</mat-label>
+                            <input matInput formControlName="avions" placeholder="Ex. 1 Main St, New York, NY"
+                                   required>
+                          </mat-form-field> -->
+
+                        <div>
+                          <button mat-button matStepperPrevious>Back</button>
+                          <button mat-button matStepperNext (click)="ajoutDeuxiemeComposant()">Next</button>
+                        </div>
+                      </form>
+                    </mat-step>
+
+
+
+
+                    <mat-step>
+                      <ng-template matStepLabel>Done</ng-template>
+                      <p>You are now done.</p>
+                      <div>
+                        <button mat-button matStepperPrevious>Back</button>
+                        <!-- <button mat-button (click)="ajouterAvion()">terminer</button> -->
+                        <button mat-button (click)="stepper.reset()">Reset</button>
+                      </div>
+                    </mat-step>
+                  </mat-stepper>
+            </div>
+
+
+
+
+
+
+</div>
+</div>

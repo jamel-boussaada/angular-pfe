@@ -1,0 +1,43 @@
+
+
+<div class="flex flex-col flex-auto md:w-100 md:min-w-50 max-h-100 -m-6 overflow-y-auto">
+
+<div class="flex flex-0 items-center justify-between h-16 pr-3 sm:pr-5 pl-6 sm:pl-8 bg-primary text-on-primary">
+    <div class="text-lg font-medium">choisir une avion</div>
+
+</div>
+<div class="container">
+<div class="centered-element">
+
+
+    <form [formGroup]="avionForm">
+
+
+        <!-- <mat-form-field appearance="standard">
+          <mat-label>Standard form field</mat-label>
+          <input  formControlName="nom" matInput placeholder="Placeholder">
+        </mat-form-field> -->
+
+
+
+
+        <mat-form-field appearance="outline">
+    <mat-label>Avion</mat-label>
+    <mat-select  formControlName="immatriculation" >
+      <mat-option  *ngFor="let a of this.avions" value="{{a.immatriculation}}">{{a.immatriculation}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+</form>
+</div>
+
+</div>
+<div mat-dialog-action [align]="'end'">
+    <button  style="margin-right: 164px;" mat-raised-button color="warn" mat-dialog-close  (click)="reset()">fermer</button>
+    <button style="margin-right: 8px;" mat-raised-button color="primary" (click)="getAvionAvion()">selectionner</button>
+
+
+    </div>
+
+
+    <br>

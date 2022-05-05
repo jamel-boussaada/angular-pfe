@@ -1,0 +1,87 @@
+<div
+    class="flex flex-col flex-auto md:w-1000 md:min-w-1000 max-h-5000 -m-6 overflow-y-auto"
+>
+    <div  id="cccc"
+        class="flex flex-0 items-center justify-between h-16 pr-3 sm:pr-5 pl-6 sm:pl-8 "
+
+        >
+        <div class="text-lg font-medium">visite</div>
+    </div>
+
+    <div class="grid-container">
+        <!-- operation -->
+        <div class="item1">
+            <h1 class="tet" style="color:#009879;">Operation:</h1>
+            <p id="txtt" *ngFor="let a of this.editdata.operation">{{ a }}</p>
+        </div>
+        <!-- traveau suppliementaire -->
+        <div class="item2">
+            <h1 class="tet" style="color:#009879;">Traveau suppliementaire:</h1>
+            <mat-form-field appearance="fill" id="sel">
+                <mat-label>Selectioner un traveau supplimenetaire pour cette visite:</mat-label>
+
+                <mat-select class="ss" [formControl]="toppings" multiple >
+
+
+                    <mat-option
+                        *ngFor="let topping of toppingList"
+                        [value]="topping">
+                        {{ topping }}</mat-option >
+
+                </mat-select>
+
+            </mat-form-field>
+            <button     mat-raised-button  id="ajouterr"   (click)="ajouterTravailSupp()" >   ajouter </button>
+
+
+
+
+
+        </div>
+        <!-- element vie limite -->
+        <div class="item3">
+            <h1 class="tet" style="color:#009879;">Consigne navigabilité:</h1>
+            <br>
+            <mat-accordion class="max-w-4xl mt-12">
+                <ng-container *ngFor="let faq of consigne;">
+
+                    <mat-expansion-panel>
+                        <mat-expansion-panel-header [collapsedHeight]="'56px'">
+                            <mat-panel-title>
+                                <section class="example-section">
+                                    <mat-checkbox class="example-margin"  value="angular" type="checkbox"  ngModel (ngModelChange)="onChecked(faq, $event)" >{{faq.objet}}</mat-checkbox>
+                                  </section>
+                             </mat-panel-title>
+                        </mat-expansion-panel-header>
+               <p class="consigne"><strong class="col">CN:</strong> {{faq.cN}} </p>   <br>
+               <p class="consigne"> <strong class="col">HT:</strong>  {{faq.hT}}</p>        <br>
+               <p class="consigne"><strong class="col"> SB:</strong> {{faq.sB}}</p>     <br>
+               <p class="consigne"> <strong class="col">application:</strong>  {{faq.application}}</p>     <br>
+               <p class="consigne"><strong class="col"> repetiviter:</strong> {{faq.repetiviter}}</p>    <br>
+               <p class="consigne"><strong class="col">effectuer:</strong>  {{faq.effectuer}}</p>     <br>
+               <p class="consigne"><strong class="col">date:</strong>  {{faq.date}}</p>   <br>
+                    </mat-expansion-panel>
+                </ng-container>
+            </mat-accordion>
+            <br>
+            <button     mat-raised-button  id="vieLimite"   (click)="ajouterConsigne()" >   ajouter </button>
+
+
+        </div>
+    </div>
+
+    <div mat-dialog-action [align]="'end'">
+        <button
+            style="margin-right: 550px"
+            mat-raised-button
+            color="warn"
+            mat-dialog-close
+            (click)="reset()"
+        >
+            fermer
+        </button>
+
+    </div>
+
+    <br />
+</div>

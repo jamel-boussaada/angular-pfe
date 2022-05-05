@@ -1,0 +1,66 @@
+.item1 {
+    grid-area: 1 / 1 / 1 / 4;
+    background-color: #ffff;
+}
+.item2 {
+    grid-area: 2 / 1 / 2 / 4;
+    background-color: azure;
+}
+.grid-container {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    grid-column: 50% 50%;
+    gap: 10px;
+
+    padding: 10px;
+    width: 100%;
+}
+
+.grid-container > div {
+    // background-color: rgba(255, 255, 255, 0.8);
+    background-color: azure;
+    //  text-align: center;
+    padding: 40px;
+    font-size: 12px;
+}
+.td1 {
+    width: 40%;
+}
+.td2 {
+    width: 20%;
+}
+
+
+.deb{
+text-align: center;
+font-size: 25px;
+color:#009879;
+}
+
+.nBill{
+    font-size: 18px
+}
+.operation{
+    font-size: 15px
+}
+.non{
+padding: 20px;
+}
+#ttt{
+    width: max-content;
+}
+
+#textA{
+    width: 60%;
+}
+#btnn{
+color: aliceblue;
+background-color: #009879;
+margin-left: 80%;
+
+}
+.lignesEspacees
+{
+ border-collapse : separate;
+ border-spacing : 10px;
+}

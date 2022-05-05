@@ -1,0 +1,122 @@
+<html>
+    <head>
+
+    </head>
+    <body>
+
+
+
+
+        <mat-stepper #stepper>
+            <mat-step [stepControl]="programmeFormGroup">
+              <form [formGroup]="programmeFormGroup">
+                <ng-template matStepLabel>programme entretien</ng-template>
+
+
+
+<table>
+<tr>
+    <td class="tttd">
+        <mat-label>nom du programme entretien</mat-label>
+    </td>
+    <td class="tttd1">
+        <mat-label>Choisir un modele</mat-label>
+    </td>
+</tr>
+<tr>
+    <td>
+        <mat-form-field appearance="fill" class="w-3/3 " >
+
+            <input matInput placeholder="nom de prog" formControlName="nomProgrammeEntretien" required>
+          </mat-form-field>
+    </td>
+    <td >
+        <mat-form-field appearance="fill"   >
+
+
+            <mat-select  formControlName="modele">
+
+              <mat-option  *ngFor="let model of allModel" value="{{model.id}}">{{model.nomModele}}</mat-option>
+
+            </mat-select>
+
+          </mat-form-field>
+    </td>
+</tr>
+
+</table>
+
+
+
+                    <div>
+                      <button mat-button matStepperNext>Next</button>
+                    </div>
+                  </form>
+                </mat-step>
+                <mat-step [stepControl]="secondFormGroup">
+                  <form [formGroup]="secondFormGroup">
+<table>
+<tr>
+    <td  id="td1">
+        <mat-label>operation</mat-label>
+    </td>
+    <td>
+        <h2 class="example-h2">type operation</h2>
+    </td>
+</tr>
+
+<tr id="scrol" *ngFor="let x of iteration" >
+    <td >
+        <ng-template matStepLabel>Fill out your address</ng-template>
+
+        <mat-form-field appearance="fill"  class="w-2/3 pr-1" >
+
+          <input id="ok" matInput formControlName="nomOperation" placeholder="donné l'operation"
+                 required>
+        </mat-form-field>
+    </td>
+<td   id="td2">
+
+    <mat-card-content>
+
+
+        <section class="example-section" >
+          <mat-checkbox class="example-margin" formControlName="a" >A</mat-checkbox>&nbsp;&nbsp;
+          <mat-checkbox class="example-margin"  formControlName="b">B</mat-checkbox>&nbsp;&nbsp;
+          <mat-checkbox class="example-margin" formControlName="c" >C</mat-checkbox>&nbsp;&nbsp;
+
+        </section>
+    </mat-card-content>
+</td>
+
+</tr>
+
+</table>
+
+
+                    <br>
+                    <div class="example-button-container">
+                        <button mat-mini-fab color="accent" aria-label="Example icon button with a plus one icon" (click)="ajouter()">
+                          <mat-icon>plus_one</mat-icon>
+                        </button>
+                      </div>
+
+                    <div>
+                      <button mat-button matStepperPrevious>Back</button>
+                      <button mat-button matStepperNext (click)="ajoutTraveaux()">Next</button>
+                    </div>
+                  </form>
+                </mat-step>
+                <mat-step>
+                  <ng-template matStepLabel>Done</ng-template>
+                  <p>You are now done.</p>
+                  <div>
+                    <button mat-button matStepperPrevious>Back</button>
+                    <button mat-button (click)="stepper.reset()">Reset</button>
+                  </div>
+                </mat-step>
+              </mat-stepper>
+
+
+    </body>
+</html>

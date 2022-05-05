@@ -1,0 +1,332 @@
+<div class="flex flex-col flex-auto min-w-0">
+
+    <!-- Main -->
+    <div class="flex-auto p-6 sm:p-10">
+
+        <!-- CONTENT GOES HERE -->
+        <div class="h-400 min-h-400 max-h-400 border-2 border-dashed border-gray-300 rounded-2xl">
+            <div class="sm:absolute sm:inset-0 flex flex-col flex-auto min-w-0 sm:overflow-hidden bg-card dark:bg-transparent">
+
+                <!-- Header -->
+                <div class="relative flex flex-col sm:flex-row flex-0 sm:items-center sm:justify-between py-8 px-6 md:px-8 border-b">
+                    <!-- Loader -->
+                    <div
+                        class="absolute inset-x-0 bottom-0"
+                        *ngIf="isLoading">
+                        <mat-progress-bar [mode]="'indeterminate'"></mat-progress-bar>
+                    </div>
+                    <!-- Title -->
+                    <div class="text-4xl font-extrabold tracking-tight">Les visites</div>
+                    <!-- Actions -->
+                    <div class="flex shrink-0 items-center mt-6 sm:mt-0 sm:ml-4">
+                        <!-- Search -->
+                        <mat-form-field class="fuse-mat-dense fuse-mat-no-subscript fuse-mat-rounded min-w-64">
+                            <mat-icon
+                                class="icon-size-5"
+                                matPrefix
+                                [svgIcon]="'heroicons_solid:search'"></mat-icon>
+                            <input
+                                matInput
+                                [formControl]="searchInputControl"
+                                [autocomplete]="'off'"
+                                [placeholder]="'Search visites'">
+                        </mat-form-field>
+                        <!-- Add visite button -->
+                        <button
+                            class="ml-4"
+                            mat-flat-button
+                            [color]="'primary'"
+                            (click)="createVisite()">
+                            <mat-icon [svgIcon]="'heroicons_outline:plus'"></mat-icon>
+                            <span class="ml-2 mr-1">Ajouter</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Main -->
+                <div class="flex flex-auto overflow-hidden">
+
+                    <!-- visites list -->
+                    <div class="flex flex-col flex-auto sm:mb-18 overflow-hidden sm:overflow-y-auto">
+
+
+                                <div class="grid">
+                                    <!-- Header -->
+                                    <div
+                                        class="inventory-grid z-5 sticky top-0 grid gap-4 py-4 px-1 md:px-8 shadow text-md font-semibold text-secondary bg-gray-50 dark:bg-black dark:bg-opacity-5"
+                                        matSort
+                                        matSortDisableClear>
+                                        <div
+                                        class="hidden sm:block"
+                                        [mat-sort-header]="'type Visite'">
+                                        type Visiteb
+                                    </div>
+                                    <div
+                                    class="hidden sm:block"
+                                    [mat-sort-header]="'nbill'">
+                                    nBill
+                                </div>
+
+
+                        <div
+                        class="hidden sm:block"
+                        [mat-sort-header]="'intervenant'">
+                        intervennat
+                    </div>
+                    <div
+                    class="hidden sm:block"
+                    [mat-sort-header]="'heure butté'">
+                    heure butté
+                </div>
+                <div
+                class="hidden sm:block"
+                [mat-sort-header]="'operations'">
+                operations
+            </div>
+
+                                        <div class="hidden sm:block">Details</div>
+                                    </div>
+                                    <!-- Rows -->
+
+                                        <ng-container *ngFor="let v of visites">
+                                            <div class="inventory-grid grid items-center gap-4 py-3 px-6 md:px-8 border-b">
+
+                                                <div class="hidden md:block truncate">
+                                                    {{v.typeVisite}}
+                                                </div>
+                                                <!-- SKU -->
+                                                <div class="hidden md:block truncate">
+                                                    {{v.nBill}}
+                                                </div>
+
+
+
+
+                                                <div class="hidden md:block truncate">
+                                                    {{v.intervenant}}
+                                                </div>
+                                                <div class="hidden md:block truncate">
+                                                    {{v.heureButer }}
+                                                </div>
+
+
+                                                <!-- operations -->
+                                                <div class="hidden md:block truncate">
+                                                    <div class="example-button-container">
+                                                        <button  color="primary"  (click)="sheckOperation(v)"  mat-icon-button  aria-label="Example icon button with a menu icon">
+                                                            <mat-icon>menu</mat-icon>
+                                                          </button>                                                      </div>
+                                                    <!-- <button
+                                                    class="ml-4"
+                                                    mat-flat-button
+                                                    [color]="'primary'"
+                                                    (click)="sheckOperation(v)">
+
+                                                    <span class="ml-2 mr-1">Consulter</span>
+                                                </button> -->
+                                                </div>
+
+                                                <!-- Details button -->
+                                                <div>
+                                                    <button
+                                                        class="min-w-10 min-h-7 h-7 px-2 leading-6"
+                                                        mat-stroked-button
+                                                        color="primary"
+                                                        (click)="toggleDetails(v.id)">
+                                                        <mat-icon
+                                                            class="icon-size-"
+                                                            [svgIcon]="selectedVisite?.id === v.id ? 'heroicons_solid:chevron-up' : 'heroicons_solid:chevron-down'"></mat-icon>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                            <div class="grid">
+                                                <ng-container *ngIf="selectedVisite?.id === v.id">
+                                                    <ng-container *ngTemplateOutlet="rowDetailsTemplate; context: {$implicit: visite}"></ng-container>
+                                                </ng-container>
+                                            </div>
+
+                                    </ng-container>
+                                </div>
+
+
+
+
+
+
+                        <ng-template
+                            #rowDetailsTemplate
+                            let-visite>
+                            <div class="shadow-lg overflow-hidden">
+                                <div class="flex border-b">
+                                    <!-- Selected visite form -->
+                                    <form
+                                        class="flex flex-col w-full"
+                                        [formGroup]="selectedVisiteForm">
+
+                                      <br><br><br>
+
+                                            <div class="flex flex-auto flex-wrap">
+                                                <!-- Name, id & etc. -->
+                                                <div class="flex flex-col w-full lg:w-2/4 sm:pl-8">
+
+                                                    <!-- Name -->
+                                                    <mat-form-field class="w-full">
+                                                        <mat-label>dateButeé </mat-label>
+                                                        <input
+                                                            matInput
+                                                            [formControlName]="'dateButeé'">
+                                                    </mat-form-field>
+                                                    <mat-form-field class="w-full">
+                                                        <mat-label>heureTotale </mat-label>
+                                                        <input
+                                                            matInput
+                                                            [formControlName]="'heureTotale'">
+                                                    </mat-form-field>
+
+                                                    <!-- SKU and Barcode -->
+                                                    <div class="flex">
+                                                        <mat-form-field class="w-1/3 pr-2">
+                                                            <mat-label>nomIngenieur</mat-label>
+                                                            <input
+                                                                matInput
+                                                                [formControlName]="'nomIngenieur'">
+                                                        </mat-form-field>
+                                                        <mat-form-field class="w-2/3 pl-2">
+                                                            <mat-label>id</mat-label>
+                                                            <input
+                                                                matInput
+                                                                [formControlName]="'id'">
+                                                        </mat-form-field>
+                                                    </div>
+                                                    <!-- heure buteé et nbill -->
+                                                    <div class="flex">
+                                                        <mat-form-field class="w-1/3 pr-2">
+                                                            <mat-label>heureButeé</mat-label>
+                                                            <input
+                                                                matInput
+                                                                [formControlName]="'heureButer'">
+                                                        </mat-form-field>
+                                                        <mat-form-field class="w-2/3 pl-2">
+                                                            <mat-label>nBill</mat-label>
+                                                            <input
+                                                                matInput
+                                                                [formControlName]="'nBill'">
+                                                        </mat-form-field>
+                                                    </div>
+                                                    <!--//TODO liste roulante-->
+                                                    <!-- TypeVisite, Brand -->
+                                                    <div class="flex">
+                                                        <mat-form-field class="w-1/3 pr-2">
+                                                            <mat-label>intervenant</mat-label>
+                                                            <mat-select [formControlName]="'intervenant'">
+                                                                <ng-container>
+
+                                                                    <mat-option *ngFor="let t of this.tech" [value]="t.id">
+                                                                        {{t.nom}}
+                                                                    </mat-option>
+                                                                </ng-container>
+                                                            </mat-select>
+                                                        </mat-form-field>
+
+                                                            <mat-form-field class="w-1/3 px-2">
+                                                        <mat-label>status</mat-label>
+                                                        <input
+                                                            matInput
+                                                            [formControlName]="'status'">
+                                                    </mat-form-field>
+
+                                                    </div>
+                                                </div>
+
+                                                <!-- Cost, Base price, Tax & Price -->
+                                                <div class="flex flex-col w-full lg:w-1/4 sm:pl-8">
+                                                    <mat-form-field class="w-full">
+                                                        <mat-label>potentielProchainVisite</mat-label>
+                                                        <input
+                                                            matInput
+                                                            [formControlName]="'potentielProchainVisite'">
+                                                    </mat-form-field>
+                                                    <mat-form-field class="w-full">
+                                                        <mat-label>typeVisite</mat-label>
+                                                        <input
+                                                            matInput
+                                                            [formControlName]="'typeVisite'">
+                                                    </mat-form-field>
+                                                    <mat-form-field class="w-full">
+                                                        <mat-label>autorisation</mat-label>
+                                                        <input
+                                                            type="number"
+                                                            matInput
+                                                            [formControlName]="'autorisation'">
+                                                    </mat-form-field>
+                                                    <mat-form-field class="w-full">
+                                                        <mat-label>tolerance</mat-label>
+                                                        <input
+                                                            matInput
+                                                            [formControlName]="'tolerance'">
+                                                    </mat-form-field>
+                                                    <mat-form-field class="w-full">
+                                                        <mat-label>dateVisite</mat-label>
+                                                        <input
+                                                            type="Date"
+                                                            matInput
+                                                            [formControlName]="'dateVisite'">
+                                                    </mat-form-field>
+                                                </div>
+                                           </div>
+
+
+                                        <div class="flex items-center justify-between w-full border-t px-8 py-4">
+                                            <button
+                                                class="-ml-4"
+                                                mat-button
+                                                [color]="'warn'"
+                                                (click)="deleteSelectedVisite()">
+                                                supprimé
+                                            </button>
+                                            <div class="flex items-center">
+                                                <div
+                                                    class="flex items-center mr-4"
+                                                    *ngIf="flashMessage">
+                                                    <ng-container *ngIf="flashMessage === 'succéss'">
+                                                        <mat-icon
+                                                            class="text-green-500"
+                                                            [svgIcon]="'heroicons_outline:check'"></mat-icon>
+                                                        <span class="ml-2">Visite modifié</span>
+                                                    </ng-container>
+                                                    <ng-container *ngIf="flashMessage === 'error'">
+                                                        <mat-icon
+                                                            class="text-red-500"
+                                                            [svgIcon]="'heroicons_outline:x'"></mat-icon>
+                                                        <span class="ml-2">erreur</span>
+                                                    </ng-container>
+                                                </div>
+                                                <button
+                                                    mat-flat-button
+                                                    [color]="'primary'"
+                                                    (click)="updateSelectedVisite()">
+                                                    modifier
+                                                </button>
+                                            </div>
+                                        </div>
+
+                                    </form>
+                                </div>
+                            </div>
+                        </ng-template>
+
+                        <ng-template #noVisites>
+                            <div class="p-8 sm:p-16 border-t text-4xl font-semibold tracking-tight text-center">There are no visites!</div>
+                        </ng-template>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

@@ -1,0 +1,178 @@
+
+<div class="flex flex-col flex-auto md:w-1000 md:min-w-1000 max-h-5000 -m-6 overflow-y-auto">
+
+    <div class="flex flex-0 items-center justify-between h-16 pr-3 sm:pr-5 pl-6 sm:pl-8 bg-primary text-on-primary">
+        <div class="text-lg font-medium" align="center">visite</div>
+
+    </div>
+
+</div>
+
+<form  [formGroup]="reservasionForm" class="flex flex-col mt-4 px-8 pt-10 bg-card shadow rounded overflow-hidden">
+<div class="menus">
+    <ul class="menu-left">
+
+        <div class="flex-auto min-w-64">
+  <!-- div 4 -->
+  <div class="flex">
+    <mat-form-field class="flex-auto">
+        <mat-label>choisir une avion</mat-label>
+        <mat-select   formControlName="avion">
+            <mat-option value="country-2">choisir une avion</mat-option>
+            <mat-option  *ngFor="let a of this.avions" value="{{a.immatriculation}}" >{{a.immatriculation}}</mat-option>
+
+
+        </mat-select>
+        <mat-icon
+            class="icon-size-5"
+            matPrefix
+            [svgIcon]="'mat_outline:airplanemode_active'"></mat-icon>
+    </mat-form-field>
+</div>
+<!-- div1 -->
+            <div class="flex">
+                <mat-form-field class="flex-auto">
+                    <mat-label>pilote</mat-label>
+                    <input
+                    formControlName="pilote"
+                        matInput
+                        [placeholder]="'nom du pilote'">
+                    <mat-icon
+                        class="icon-size-5"
+                        matPrefix
+                        [svgIcon]="'person'"></mat-icon>
+                </mat-form-field>
+            </div>
+
+
+<!-- div 2 -->
+<div class="flex">
+    <mat-form-field
+
+        class="flex-auto">
+        <mat-label>Choose a date</mat-label>
+        <input
+        formControlName="dateReservation"
+            matInput
+            [matDatepicker]="picker1">
+        <mat-datepicker-toggle
+        matPrefix
+            [for]="picker1"></mat-datepicker-toggle>
+        <mat-datepicker #picker1></mat-datepicker>
+    </mat-form-field>
+</div>
+            <!-- div 3 -->
+            <div class="flex">
+                <mat-form-field class="flex-auto">
+                    <mat-label>dureé</mat-label>
+                    <input
+                    formControlName="durer"
+                        matInput
+                        [placeholder]="'dureé'">
+                    <mat-icon
+                        class="icon-size-5"
+                        matPrefix
+                        [svgIcon]="'access_time'"></mat-icon>
+                </mat-form-field>
+
+        </div>
+
+            </div>
+
+    </ul>
+    <ul class="menu-right">
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <div class="flex-auto min-w-64">
+            <!-- div 1 -->
+        <div class="flex">
+            <mat-form-field class="flex-auto">
+                <mat-label>instructeur</mat-label>
+                <input
+                formControlName="instructeur"
+                    matInput
+                    [placeholder]="'instructeur'">
+                <mat-icon
+                    class="icon-size-5"
+                    matPrefix
+                    [svgIcon]="'mat_solid:integration_instructionss'"></mat-icon>
+            </mat-form-field>
+        </div>
+<!-- div 2 -->
+
+            <div class="flex">
+                <mat-form-field class="flex-auto">
+                    <mat-label>Départ</mat-label>
+                    <input
+                    formControlName="depart"
+                        matInput
+                        [placeholder]="'Départ'">
+                    <mat-icon
+                        class="icon-size-5"
+                        matPrefix
+                        [svgIcon]="'holiday_village'"></mat-icon>
+                </mat-form-field>
+            </div>
+            <!-- div 3 -->
+            <div class="flex">
+
+                <mat-form-field class="flex-auto">
+                    <mat-label>arriveé</mat-label>
+                    <input
+                    formControlName="arriver"
+                        matInput
+                        [placeholder]="'mail@arriveé'">
+                    <mat-icon
+                        class="icon-size-5"
+                        matPrefix
+                        [svgIcon]="'holiday_village'"></mat-icon>
+                </mat-form-field>
+
+            </div>
+            <!-- div 4 -->
+            <div class="flex">
+                <mat-form-field class="flex-auto">
+                    <mat-label>att</mat-label>
+                    <input
+                    formControlName="att"
+                        matInput
+                        [placeholder]="'att'">
+                        <mat-icon
+                        class="icon-size-5"
+                        matPrefix
+                        [svgIcon]="'mat_solid:airplanemode_active'"></mat-icon>
+                </mat-form-field>
+
+
+        </div>
+
+
+        </div>
+        </ul>
+</div>
+<br>
+<div mat-dialog-action [align]="'end'">
+    <button  style="margin-right: 164px;" mat-raised-button color="warn" mat-dialog-close  (click)="reset()">fermer</button>
+    <button style="margin-right: 8px;" mat-raised-button color="primary" (click)="getReservasion()">selectionner</button>
+
+
+    </div>
+    <br><br>
+</form>
+
+
+
+
+
+

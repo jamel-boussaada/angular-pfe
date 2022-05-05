@@ -1,0 +1,19 @@
+<html>
+    <head></head>
+    <body clss="b">
+        <img src="../../../assets/images/carrousel/plane2.jpg">
+    <form [formGroup]="avionForm">
+        <div class="box">
+            <select  formControlName="role">
+                <option value="choisir un role" selected>---choisir votre role---</option>
+              <option value="ing">ingenieur</option>
+              <option value="tech">technecien</option>
+            </select>
+            <button color ='primary' mat-raised-button  (click)="role()">selectionner</button>
+          </div>
+
+
+
+    </form>
+    </body>
+</html>

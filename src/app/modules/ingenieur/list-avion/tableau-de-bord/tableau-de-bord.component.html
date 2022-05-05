@@ -1,0 +1,130 @@
+<div class="flex flex-col flex-auto min-w-0">
+    <!-- Main -->
+    <div class="flex-auto p-6 sm:p-10"
+
+  >
+        <!-- CONTENT GOES HERE -->
+        <!-- CONTENT GOES HERE -->
+        <div
+            class="h-400 min-h-400 max-h-400 border-2 border-dashed border-gray-300 rounded-2xl"
+
+            >
+            <div
+                class="sm:absolute sm:inset-0 flex flex-col flex-auto min-w-0 sm:overflow-hidden bg-card dark:bg-transparent"
+
+                >
+                <!-- Header -->
+                <div id='ok'
+                    class="relative flex flex-col sm:flex-row flex-0 sm:items-center sm:justify-between py-8 px-6 md:px-8 border-b"
+
+
+                    >
+                    <!-- Loader -->
+                    <div class="absolute inset-x-0 bottom-0" *ngIf="isLoading"      >
+                        <mat-progress-bar
+                            [mode]="'indeterminate'"
+                        ></mat-progress-bar>
+                    </div>
+                    <!-- Title -->
+                    <div class="text-4xl font-extrabold tracking-tight" >
+                        Tableau de bord
+                    </div>
+                    <!-- Actions -->
+                    <div
+                        class="flex shrink-0 items-center mt-6 sm:mt-0 sm:ml-4"
+                    >
+
+                    </div>
+                </div>
+                <br>
+
+                <div class="grid-container" *ngIf="affiche">
+
+
+                    <div class="item1">
+<p>status:</p>
+                      <p id="act">Active       </p>
+
+
+                    </div>
+
+
+                    <div class="item2">
+
+                        <h2>date du prochaine reservasion:<br><strong class="B"> 18/04/2022</strong> </h2>
+                    </div>
+
+
+                    <div class="item3">
+                        <table>
+                            <h1></h1>
+                            <br><br>
+<tr>
+    <td><strong> id:</strong> </td>
+    <td>   <p>  {{ this.avion.id }}</p></td>
+</tr>
+<tr>
+    <td><strong> immatriculation:</strong></td>
+    <td> <p>{{ this.avion.immatriculation }}</p></td>
+</tr>
+<tr>
+    <td><strong>numderoSerie:</strong></td>
+    <td>  <p>{{ this.avion.numderoSerie }}</p></td>
+</tr>
+<tr>
+    <td><strong>fHGV:</strong></td>
+    <td>  <p>{{ this.avion.fHGV }}</p></td>
+</tr>
+<tr>
+    <td><strong>fHNEW:</strong></td>
+    <td><p>{{ this.avion.fHNEW }}</p></td>
+</tr>
+<tr>
+    <td><strong>dateFabrication:</strong></td>
+    <td><p>{{ this.avion.dateFabrication }}</p></td>
+</tr>
+<tr>
+    <td><strong>dateProcheneEcheance:</strong></td>
+    <td> <p>{{ this.avion.dateProcheneEcheance}}</p></td>
+</tr>
+<tr>
+    <td> <strong>dateProcheneVisiteCEN:</strong></td>
+    <td><p>{{this.avion.dateProcheneVisiteCEN}}</p></td>
+</tr>
+
+                        </table>
+                         </div>
+
+
+                    <div class="item4">
+<h2>heure totale celule depuis neuf :</h2>
+<h1 class ="fhNew">{{ this.avion.fHNEW }}</h1>
+<div align="justify">
+<h2>depuis grand visite:   <strong id='color'>{{ this.avion.fHGV }}</strong>  </h2>
+</div>
+                    </div>
+
+
+
+                    <div class="item6">
+                        <!-- <h2>prochain potanciel :</h2> -->
+                        <h2>heure restante: <br><strong class="C">49:38</strong></h2>
+                    </div>
+
+
+                    <div class="item9">
+                        <h2>heure totale helice: <strong class="A">50:22</strong></h2>
+
+                    </div>
+
+
+                    <div class="item10">
+
+                        <h2>heure totale moteur: <strong class="A">50:22</strong></h2>
+
+
+                    </div>
+            </div>
+        </div>
+    </div>
+</div>

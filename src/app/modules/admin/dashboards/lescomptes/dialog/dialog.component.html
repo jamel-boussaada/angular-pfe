@@ -1,0 +1,64 @@
+<h1 mat-dialog-title>ajouter un utilisateur</h1>
+
+
+ <div mat-dialog-content>
+
+ <form [formGroup]="userForm">
+    <mat-form-field appearance="outline">
+        <mat-label>nom</mat-label>
+        <input formControlName="nom"  matInput placeholder="donner votre nom">
+      </mat-form-field><br>
+
+      <mat-form-field appearance="outline">
+        <mat-label>prenom</mat-label>
+        <input formControlName="prenom"  matInput placeholder="donner votre prenom">
+      </mat-form-field><br>
+
+      <mat-form-field appearance="outline">
+        <mat-label>email</mat-label>
+        <input  formControlName="email" matInput placeholder="donner votre adresse mail">
+      </mat-form-field><br>
+
+
+      <mat-form-field appearance="outline">
+        <mat-label>mot de passe </mat-label>
+        <input  formControlName="password" type="password" matInput placeholder="donner votre mot de passe">
+      </mat-form-field><br>
+
+
+      <mat-form-field appearance="outline">
+        <mat-label>Telephone</mat-label>
+        <input  formControlName="telephone" type="tel" matInput placeholder="555-555-1234">
+        <mat-icon matSuffix>mode_edit</mat-icon>
+      </mat-form-field><br>
+
+<!--TODO select -->
+      <mat-form-field appearance="outline">
+        <mat-label>role </mat-label>
+<mat-select formControlName="roles">
+<mat-option value="ROLE_ADMIN">admin</mat-option>
+<mat-option value="ROLE_INGENIEUR">ingenieur</mat-option>
+<mat-option value="ROLE_TECHNECIEN">technecien</mat-option>
+<mat-option value="ROLE_INGENIEUR,ROLE_TECHNECIEN">technecien et ibgenieur</mat-option>
+</mat-select>
+      </mat-form-field><br>
+
+
+      <!-- <mat-label><h1>Roles</h1></mat-label>
+
+      <mat-checkbox  class="example-ripple-checkbox"  *ngFor="let role of roles" formControlName="roles">
+         <p value="role">{{role}}</p>
+        </mat-checkbox> -->
+
+ </form>
+
+ <br><br>
+
+</div>
+<div mat-dialog-action [align]="'end'">
+<button mat-raised-button color="warn" mat-dialog-close  (click)="reset()">Close</button>
+<button style="margin-left: 8px;" mat-raised-button color="primary" (click)="addUser()">{{actionBtn}}</button>
+
+
+
+</div>

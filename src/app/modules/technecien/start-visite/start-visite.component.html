@@ -1,0 +1,65 @@
+
+
+
+
+<html>
+    <head>
+
+    </head>
+    <body>
+
+        <div class="grid-container" id="contentToConvert" >
+            <div class="item1" >
+
+            <h1 class="deb"><strong>Debut du visite</strong></h1>
+            <h2 class="nBill"> <strong>numero visite : </strong>{{  this.example.nBill}}</h2>
+            </div>
+
+
+
+
+
+            <div class="item2">
+                <table class=lignesEspacees>
+                    <tr>
+                        <td class="td1">               Operation         </td>
+                        <td class="td2">           Action             </td>
+                        <td class="td3">             Remarque           </td>
+                    </tr>
+
+                    <tr *ngFor="let op of this.example.operations">
+<!-- <from [FormArray]="resultatVisiteFormGroup"> -->
+                        <td>      <h1 class="operation"  ><strong>{{op}}</strong></h1> </td>
+
+
+
+                        <td>
+
+                            <mat-radio-group aria-label="Select an option" >
+                                <mat-radio-button value="Oui">Oui &ensp;</mat-radio-button>
+                                <mat-radio-button class ="non" value="Non">Non</mat-radio-button>
+                              </mat-radio-group>
+                        </td>
+                      <td id="textA">
+
+                            <mat-form-field  id="ttt" class="example-full-width" appearance="fill" class="w-2/3 pl-1">
+                                <textarea matInput ></textarea>
+                              </mat-form-field>
+                        </td>
+                    <!-- </from> -->
+                    </tr>
+
+                </table>
+
+
+
+
+<br><br>
+                <button id="btnn" mat-raised-button  (click)="downloadAsPDF()">Enregistrer visite</button>
+
+            </div>
+
+            </div>
+
+    </body>
+</html>

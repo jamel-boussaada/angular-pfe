@@ -1,0 +1,16 @@
+.menus {
+    overflow:auto;
+}
+.menu-left, .menu-right {
+    padding:20px;
+    margin:2;
+    list-style: none;
+}
+.menu-left {
+    float:left;
+}
+.menu-right {
+
+    float:right;
+    text-align: right;
+}
